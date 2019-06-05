@@ -1,0 +1,32 @@
+<!--purchase.wxml-->
+<!-- <text>purchase.wxml</text> -->
+
+<view class='container'>
+  <!-- 菜单 -->
+  <view class='menu'>
+    <ul>
+      <!-- scrollList 修改cate -->
+      <!-- 这里的高度，应该计算获得，这里暂时写死了  -->
+      <li bindtap="clickMenu" wx:if="{{ scrollTop < 1226}}" class="active" data-cate='fruit'>水果</li>
+      <li bindtap="clickMenu" wx:if="{{ scrollTop >= 1226}}" data-cate='fruit'>水果</li>
+
+      <li bindtap="clickMenu" wx:if="{{ scrollTop >= 1226 && scrollTop < 2452}}" class='active' data-cate='vegetables'>蔬菜</li>
+      <li bindtap="clickMenu" wx:if="{{ scrollTop < 1226 || scrollTop >=2452 }}" data-cate='vegetables'>蔬菜</li>
+
+      <li bindtap="clickMenu" wx:if="{{ scrollTop >= 2452 }}" class="active" data-cate='meat'>肉蛋</li>
+      <li bindtap="clickMenu" wx:if="{{ scrollTop < 2452 }}" data-cate='meat'>肉蛋</li>
+
+    </ul>
+  </view>
+  <!-- item -->
+  <!-- scroll-into-view 属性的值是什么，就滚动到什么  -->
+  <scroll-view class='list' scroll-y scroll-into-view="{{cate}}">
+    <!-- id 标记锚点  -->
+    <view id='fruit'>水果</view>
+    <image wx:for="{{items}}" class='item' src='../../images/default_banner_img.png'></image>
+    <view id='vegetables'>蔬菜</view>
+    <image wx:for="{{items}}" class='item' src='../../images/default_banner_img.png'></image>
+    <view id='meat'>肉蛋</view>
+    <image wx:for="{{items}}" class='item' src='../../images/default_banner_img.png'></image>
+  </scroll-view>
+</view>

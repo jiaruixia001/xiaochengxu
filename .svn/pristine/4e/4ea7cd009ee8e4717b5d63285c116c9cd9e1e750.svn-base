@@ -1,0 +1,16 @@
+/* pages/login/pages/register.wxss */
+@import '../perfectInfo/perfectInfo.wxss';
+
+.login-btn{
+  margin-bottom: 40rpx;
+}
+.protocol-row{
+  text-align:center;
+  margin: 0 32rpx;
+  height: 116rpx;
+  font-size: 30rpx;
+}
+
+.link-text{
+  color: blue;
+}

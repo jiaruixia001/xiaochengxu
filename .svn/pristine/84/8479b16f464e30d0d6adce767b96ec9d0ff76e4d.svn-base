@@ -1,0 +1,10 @@
+<!--login.wxml-->
+
+<view class='cell-row margin20'>
+  <input placeholder="请输入手机号" auto-focus />
+</view>
+<view class='cell-row checkcode-row'>
+  <input placeholder="请输入验证码" auto-focus />
+  <button class='checkcode-btn'>获取验证码</button>
+</view>
+<button bindtap='onLogin' class='login-btn'>登录</button>

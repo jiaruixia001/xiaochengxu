@@ -1,0 +1,16 @@
+<!--pages/login/pages/perfectInfo/perfectInfo.wxml-->
+<view class='cell-row margin20'>
+  <input placeholder="姓名" auto-focus />
+</view>
+<view class='cell-row sex'>
+  <radio-group class="radio-group" >
+    <label class="radio" wx:for="{{sexItems}}">
+      <radio value="{{item.name}}" checked="{{item.checked}}" />
+      {{item.name}}
+    </label>
+  </radio-group>
+</view>
+<view class='cell-row'>
+  <input placeholder="公司名称" auto-focus />
+</view>
+<button class='login-btn'>确定</button>

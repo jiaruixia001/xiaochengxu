@@ -1,0 +1,29 @@
+<!-- <text>search.wxml</text> -->
+
+<view class='search-page'>
+  <view class="sch-wrap">
+    <icon type='search' size='40rpx'></icon>
+    <input type='text' placeholder='搜索您感兴趣的商品…'></input>
+    <view class="sch-btn">搜索</view>
+  </view>
+</view>
+    
+<view class='goods-item-wrapper'>
+        <view wx:for="{{[1,1,1,1,1,1,1,1]}}" class='goods-item'>
+          <image class='logo-url' mode='center' src='images/icon1@2x.png'></image>
+         <text wx:if="{{index%2==0}}" class='title two-line'>厂家直销</text>
+          <text wx:elif="{{index%3==0}}" class='title two-line'>厂家直销悦谷百味五谷杂粮 红豆薏米10件起订10件起订10件起订10件起订10件起订10件起订10件起订10件起订</text>
+          <text wx:else class='title two-line'>厂家直销悦谷百味五谷杂粮 红豆薏米</text>
+          <view class='price-line'>
+            <text class='price'>¥ 8.90</text>
+            <text class='info'>10件起订</text>
+          </view>
+        </view>
+</view>
+<view class="goods-no-data">
+  <image class='logo-url' mode='center' src='images/icon1@2x.png'></image>
+  <text class="no-data-tip">
+  暂时没有符合该搜索条件的商品
+  请重新搜索
+  </text>
+</view>

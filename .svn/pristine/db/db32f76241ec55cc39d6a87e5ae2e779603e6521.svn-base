@@ -1,0 +1,8 @@
+<!--pages/login/pages/wxAuthorize/wxAuthorize.wxml-->
+
+<view class='logo-row'>
+  <view class='logo-wrapper'>
+    <image class='logo' src='../../../../images/default_banner_img.png' mode='aspectFit'></image>
+  </view>
+</view>
+<button class='authorize-btn' open-type='getUserInfo'>微信授权</button>

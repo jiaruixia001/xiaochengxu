@@ -1,0 +1,201 @@
+// 登录相关的逻辑
+
+/**网络请求状态码 */
+var DO_LOGIN = 1;
+//获取应用实例
+var app = getApp();
+
+/**
+ * 1. 判断之前是否有授权 'isAuth'
+ * 2. 未授权，调用登录接口
+ * 3. 请求用户信息授权
+ * 4. 获取用户信息
+ * 5. 发起登录网络请求
+ */
+// wx.au and wx.login
+function doWxAuthorize(callback) {
+  wx.showNavigationBarLoading();
+
+debugger
+  // 判断之前是否有授权
+  wx.getStorage({//1
+    key: 'isAuth',
+    success: function (res) {
+      //已经授权，跳转到首页
+    },
+    fail: function (res) {//未授权
+      getWxCodeAndGetAuthorize(
+        function success(code){
+          // 获取到了微信的code码，并且得到“获取用户信息”的授权
+          getUserInfoAndLogin(code, callback);
+        }, 
+        function fail(errorType){
+          wx.hideNavigationBarLoading();
+
+          switch (errorType){
+            case 1:
+            //wx.login fail
+              break;
+            case 2:
+            //wx.login 获取code失败
+              break;
+            case 3:
+            //wx.getSetting fail
+              break;
+            case 4:
+            //用户拒绝授权
+              wx.navigateTo({
+                url: 'pages/wxAuthorize/wxAuthorize',
+              })
+              break;
+          }
+        }
+      )
+    }
+  });
+}
+function showTipInfo(info){
+  wx.showToast({
+    title: (info ? info : '授权失败'),
+  })
+}
+
+/**
+ * 获取微信 code 并进行 获取用户信息授权
+ */
+function getWxCodeAndGetAuthorize(successBack, failBack) {
+  wx.login({//
+    success: function (res) {
+      var code = res.code;
+      if (!code) {
+        console.log('获取用户登录态失败！' + res.errMsg)
+        showTipInfo('授权失败')
+        failBack(2)//wx.login 获取code失败
+        return;
+      }
+
+      wx.getSetting({
+        success(res) {
+          if (!res.authSetting['scope.userInfo']) {//没有授权authSetting中就没有 scope.userInfo 字段
+            // 请求“获取用户信息”的授权
+            wx.authorize({
+              scope: 'scope.userInfo',
+              success() {
+                successBack(code)
+              }, fail: function (res) {//
+                //用户拒绝授权
+                failBack(4, res)
+              }
+            })
+          } else {
+            // 用户已经同意授权
+            successBack(code)
+          }
+        }, fail: function (res) {//wx.getSetting fail
+          wx.hideNavigationBarLoading();
+          showTipInfo('授权失败')
+          failBack(3, res)
+        }
+      })
+
+    }, fail: function (res) {//wx.login fail
+      console.log('获取用户登录态失败！' + res.errMsg)
+      showTipInfo('授权失败')
+      failBack(1, res)
+    }
+  })
+}
+/**
+ * 获取用户信息并登录
+ * 1. 获取用户信息
+ * 2. 发起网络请求
+ */
+function getUserInfoAndLogin(code, callback){
+  wx.getUserInfo({//1 获取用户信息
+    withCredentials: true,
+    success: function (userRes) {
+      app.globalData.userInfo = userRes.userInfo
+      console.log(userRes);
+      //2 发起网络请求
+      var params = {
+        code: code,
+        rawData: userRes.rawData,
+        signature: userRes.signature,
+        encryptedData: userRes.encryptedData,
+        iv: userRes.iv
+      };
+      app.webCall("/login/authLogin", params, DO_LOGIN, onSuccess, onErrorBefore, onComplete);
+    }, fail: function (res) {//1
+      //用户拒绝授权
+      wx.hideNavigationBarLoading();
+      console.log(res.errMsg)
+      if (res.errMsg == 'getUserInfo:fail auth deny') {
+      }
+    }
+  })
+}
+
+/**
+ * 
+ */
+function bindWxAccount(){
+  var params = {
+    code: code,
+    rawData: userRes.rawData,
+    signature: userRes.signature,
+    encryptedData: userRes.encryptedData,
+    iv: userRes.iv
+  };
+  app.webCall("/login/authLogin", params, DO_LOGIN, onSuccess, onErrorBefore, onComplete);
+}
+
+/**
+   * 接口访问成功返回
+   * @param {Object} data
+   * @param {Object} requestCode
+   */
+function onSuccess(data, requestCode) {
+  console.log("home onSuccess");
+  switch (requestCode) {
+    case DO_LOGIN:
+      wx.setStorageSync("userIsBind", data.isBind);
+      switch(data.isBind){
+        case 0: //没有绑定: 跳到登录页面，传递手机号给服务器端
+          wx.navigateTo({
+            url: 'login',
+          })
+          break;
+        case 1: //已绑定（自动登录）
+          break;
+        case 2: //已绑定，未完善资料
+          break;
+      }
+return;
+      wx.setStorageSync("isAuth", "true");
+      app.isLogin = true;
+      app.appUser = data.data;
+      app.appSecretKey = data.data.secretKey;
+      break;
+  }
+}
+/**
+ * 接口访问失败返回
+ * @param {Object} resultCode
+ * @param {Object} resultMsgDesc
+ */
+function onErrorBefore(resultCode, resultMsgDesc) {
+  wx.showToast({
+    title: resultMsgDesc,
+  })
+}
+/**
+ * 接口访问完成
+ * @param {Object} resultCode
+ */
+function onComplete(resultCode) {
+  wx.hideNavigationBarLoading();
+}
+
+module.exports = {
+  doWxAuthorize: doWxAuthorize
+}

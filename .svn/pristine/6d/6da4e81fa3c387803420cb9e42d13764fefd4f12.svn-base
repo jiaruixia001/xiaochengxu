@@ -1,0 +1,29 @@
+/* purchase.wxss */
+.menu{
+  width: 20%;
+  float: left;
+  height: 900rpx;
+  background: rgba(0, 0, 0, 0.2);
+}
+.list{
+  width: 80%;
+  float: right;
+  height: 900rpx;
+  background: white;
+}
+.item{
+  padding: 0;
+  margin-bottom: -6px;
+  height: 120px;
+  width: 100%;
+}
+
+li{
+  padding: 5px;
+  text-align: center;
+  color: white;
+  display: block;
+}
+.active{
+  background: gray;
+}

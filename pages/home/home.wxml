@@ -1,0 +1,78 @@
+<!--home.wxml-->
+
+<!-- banner -->
+<swiper
+  style='{{showBanner}}'
+  class='{{hiddenClasses}}'
+  bindanimationend="animationEnd"
+  indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}"
+  interval="{{interval}}"
+  duration="{{duration}}"
+  indicator-color="#000" indicator-active-color="#FF6800" circular="true"
+>
+  <block wx:for="{{bannerRows}}">
+    <swiper-item>
+      <image 
+        bindtap="bannerImageClicked" 
+        binderror="bannerImageError" 
+        src="{{item}}" class="banner-image" mode="aspectFill" >
+      </image>
+    </swiper-item>
+  </block>
+  <image wx:if="{{!bannerRows || bannerRows.length<1}}" 
+        src="{{defaultBannerImage}}" >
+  </image>
+</swiper>
+<!-- 商品 -->
+<!-- https://blog.csdn.net/sophie_u/article/details/71745125 -->
+<view >
+  <!-- 商品bar -->
+  <view class='goods-bar-wrapper'>
+    <scroll-view scroll-x="true" class="tab-header" scroll-left="{{scrollLeft}}">
+      <view bindtap='goodsBarItemClicked' wx:for="{{goodTitleRows}}" class="tab-item {{currentTab==index?'active':''}}" data-current="{{index}}" >{{item}}</view>
+    </scroll-view>
+    <view bindtap='onGoodsItemSearch' class='search-icon-wrapper'>
+      <icon type='search' size='40rpx'></icon>
+    </view>
+  </view>
+  <!-- 商品内容 -->
+  <scroll-view 
+    scroll-into-view="{{toView}}" 
+    style='position:relative;height: {{goodsViewHeight}}rpx;' 
+    scroll-y 
+    enable-back-to-top
+    bindscroll="goodsViewDidScroll"
+  >
+    <view wx:for="{{goodTitleRows}}" class='type-wrapper'>
+      <view id="{{'goodsItem'+index}}" class='title'>
+        <view class='small-star-item'></view>
+        <text>{{item}}</text>
+        <view class='small-star-item'></view>
+      </view>
+      <view class='goods-item-wrapper'>
+        <view wx:for="{{[1,1,1,1,1,1,1,1]}}" class='goods-item'>
+          <image class='logo-url' mode='center' src='images/jm_rong_img.png'></image>
+          <text wx:if="{{index%2==0}}" class='title two-line'>厂家直销</text>
+          <text wx:elif="{{index%3==0}}" class='title two-line'>厂家直销悦谷百味五谷杂粮 红豆薏米10件起订10件起订10件起订10件起订10件起订10件起订10件起订10件起订</text>
+          <text wx:else class='title two-line'>厂家直销悦谷百味五谷杂粮 红豆薏米</text>
+          <view class='price-line'>
+            <text class='price'>¥ 8.90</text>
+            <text class='info'>10件起订</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='home-footer'>
+      <text class='no-more'>—— 没有更多 ——</text>
+      <view class='hori-line-dot'></view>
+      <text class='title'>免责声明</text>
+      <view class='content'>
+        <text>
+        聚贸为第三方交易平台及互联网信息服务提供者，所展示的商品/服务的标题、价格、详情等信息内容系由店铺经营者发布，其真实性、准确性和合法性均由店铺经营者负责。聚贸提醒您购买商品/服务前注意谨慎核实，如您对商品/服务的标题、价格、详情等任何信息有任何疑问的，请在购买前与店铺经营者沟通确认；聚贸存在海量店铺，如您发现店铺内有任何违法/侵权信息，请立即向聚贸举报并提供有效线索。
+        </text>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+

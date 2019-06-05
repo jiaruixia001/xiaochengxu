@@ -1,0 +1,14 @@
+// login.js
+Page({
+  data: {
+  },
+  onLoad: function () {
+  },
+  jumpTo: function (e) {
+    // 获取标签元素上自定义的 data-opt 属性的值
+    let target = e.currentTarget.dataset.opt;
+    this.setData({
+      toView: target
+    })
+  }
+})

@@ -1,0 +1,21 @@
+<!--index.wxml-->
+
+<!-- <view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+</view> -->
+
+<!-- 接口测试 -->
+<view>
+  <label>接口测试</label>
+  <button type="default" bindtap="onAuthorNoBind"> 已授权未绑定 </button>
+  <button bindtap="onAuthorBind"> 已授权已绑定 </button>
+</view>

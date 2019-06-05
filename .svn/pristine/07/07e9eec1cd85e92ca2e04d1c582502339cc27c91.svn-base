@@ -1,0 +1,26 @@
+/* pages/login/pages/wxAuthorize/wxAuthorize.wxss */
+
+.logo-row{
+  margin-top: 100rpx;
+}
+.logo-row .logo-wrapper{
+  width:220rpx;
+  height:220rpx;
+  background:rgba(255,104,0,1);
+  border-radius:10rpx;
+}
+.logo-row .logo-wrapper .logo{
+  width:126rpx;
+  height:110rpx;
+}
+.authorize-btn{
+  margin: 200rpx 40rpx 80rpx 40rpx;
+  height:94rpx;
+  line-height:94rpx;
+  background:rgba(0,189,0,1);
+  border-radius:10rpx;
+  font-size:36rpx;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(255,255,255,1);
+}

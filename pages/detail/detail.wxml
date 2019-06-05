@@ -1,0 +1,121 @@
+<!--pages/detail/detail.wxml-->
+<swiper
+  style='{{showBanner}}'
+  class='detail-swiper'
+  bindanimationend="animationEnd"
+  indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}"
+  interval="{{interval}}"
+  duration="{{duration}}"
+  indicator-color="#000" indicator-active-color="#FF6800" circular="true"
+>
+  <block wx:for="{{bannerRows}}">
+    <swiper-item>
+      <image 
+        bindtap="bannerImageClicked" 
+        binderror="bannerImageError" 
+        src="{{item}}" class="banner-image" mode="aspectFill" >
+      </image>
+    </swiper-item>
+  </block>
+  <image wx:if="{{!bannerRows || bannerRows.length<1}}" 
+        src="{{defaultBannerImage}}" >
+  </image>
+</swiper>
+<view class="product-info">
+  <view class="product-title">厂家直销悦谷百味五谷杂杂杂粮八宝粥米1kg 真空包装</view>
+  <view class="price-wrap">
+    <view class="fn-left">
+      <view class="price-one">¥ <text>8.90</text></view>
+      <view class="price-two">¥12.90</view>
+      <view class="number">10件起订</view>
+    </view>
+    <view class="fn-left">
+      <view class="price-one">¥ <text>8.90</text></view>
+      <view class="price-two">¥12.90</view>
+      <view class="number">10件起订</view>
+    </view>
+    <view class="fn-left">
+      <view class="price-one">¥ <text>8.90</text></view>
+      <view class="price-two">¥12.90</view>
+      <view class="number">≥100件</view>
+    </view>
+
+  </view>
+  <view class="price-wrap price-one-line">
+    <view class="price-one">¥ <text>8.90</text></view>
+      <view class="price-two">¥12.90</view>
+      <view class="number">≥100件</view>
+  </view>
+</view>
+<view class="choose-size">
+  <view>选择规格
+  </view>
+</view>
+<view class="company-info">
+  <view class="left-logo"></view>
+  <view class="company-name">
+    <view class="name one-line">聚贸电子商务有限公司</view>
+    <view class="icons">
+    </view>
+  </view>
+  <view class="go-shop">
+    进入店铺
+  </view>
+</view>
+<view class="recommend-product">
+  <view class="recommend-title">商品推荐</view>
+  <view class="ul">
+    <view class="li">
+      <view class="img-wrap"></view>
+      <view class="recomment-money">¥ <text>8.90</text></view>
+    </view>
+    <view class="li">
+      <view class="img-wrap"></view>
+      <view class="recomment-money">¥ <text>8.90</text></view>
+    </view>
+    <view class="li">
+      <view class="img-wrap"></view>
+      <view class="recomment-money">¥ <text>8.90</text></view>
+    </view>
+  </view>
+</view>
+<view class="recommend-product goods-detail">
+  <view class="recommend-title">商品详情</view>
+  <view class="one-line"><text>商品参数</text>商品参数描述的内容商品参数描述的内容商品参数描述的内容商品参数描述的内容</view>
+  <view class="one-line"><text>商品参数</text>商品参数描述的内容商品参数描述的内容商品参数描述的内容商品参数描述的内容</view>
+  <view class="one-line"><text>商品参数</text>商品参数描述的内容商品参数描述的内容商品参数描述的内容商品参数描述的内容</view>
+  <view class="detail-info">
+    <view class="display-icon" bindtap="ctrlDisplay">展开</view>
+    <view class="detail-inner" hidden="{{displayHidden}}" >    
+    <image src="{{defaultBannerImage}}" ></image>
+    </view>
+  </view>
+  <view class="tool-bar">
+    <text class="shop">店铺</text>
+    <text class="shop">采购单</text>
+    <text class="btn btn1">加入采购</text>
+    <text class="btn btn2">立即订购</text>
+  </view>
+</view>
+
+<view class="modal-size" wx:if="{{showModal}}">
+  <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove"></view>
+  <view class="modal-dialog">
+    <view class="modal-inner">
+      <view class="size-info">
+        <view class="left">
+          <view class="s-title">1kg/红豆薏米</view>
+          <view class="s-price">¥42.90</view>
+        </view>
+        <view class="right">
+          <view class="number-ctrl">
+            <text class="ctrl-btn">-</text>
+            <input type="text" class="num-ipt"></input>
+            <text class="ctrl-btn">+</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

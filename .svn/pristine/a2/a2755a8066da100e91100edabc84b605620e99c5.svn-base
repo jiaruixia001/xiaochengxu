@@ -1,0 +1,24 @@
+/* login.wxss */
+page {
+  height: 100%;
+}
+.btn_jump {
+  position: fixed;
+  z-index: 9;
+  top: 30rpx;
+  right: 10rpx;
+}
+.btn_jump .btn_item {
+  border: 1rpx solid #aaa;
+  margin-bottom: 30rpx;
+}
+.jump_list {
+  position: relative;
+  height: 100%;
+}
+.list_item {
+  height: 80rpx;
+}
+.list_item:nth-of-type(even) {
+  background: #f8f8f8;
+}

@@ -1,0 +1,18 @@
+<!--login.wxml-->
+
+<text style='height:200rpx;'>login.wxml</text>
+<view class="btn_jump">
+  <view class='btn_item' bindtap='jumpTo' data-opt="item0">ToItem0</view>
+  <view class='btn_item' bindtap='jumpTo' data-opt="item11">ToItem11</view>
+  <view class='btn_item' bindtap='jumpTo' data-opt="item29">ToItem29</view>
+</view>
+
+<scroll-view class="jump_list"
+    scroll-into-view="{{toView}}" 
+    scroll-y="true" 
+    scroll-with-animation="true" >
+  <view wx:for="{{30}}" wx:key="{{item}}"
+      id="item{{item}}" class="list_item" >
+      {{item}}
+  </view>
+</scroll-view>
